@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DataNascimento__c</fullName>
+    <defaultValue>NOW()</defaultValue>
+    <description>Data que o candidato nasceu, registrado na certidão de nascimento. (Usada no cálculo de idade)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Data que o candidato nasceu, registrado na certidão de nascimento.</inlineHelpText>
+    <label>Data de Nascimento</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <description>Status do round</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Status do round</inlineHelpText>
+    <label>Status</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Em definição</fullName>
+                <default>true</default>
+                <label>Em definição</label>
+            </value>
+            <value>
+                <fullName>Coletando candidatos</fullName>
+                <default>false</default>
+                <label>Coletando candidatos</label>
+            </value>
+            <value>
+                <fullName>Em Andamento</fullName>
+                <default>false</default>
+                <label>Em Andamento</label>
+            </value>
+            <value>
+                <fullName>Suspenso</fullName>
+                <default>false</default>
+                <label>Suspenso</label>
+            </value>
+            <value>
+                <fullName>Finalizado</fullName>
+                <default>false</default>
+                <label>Finalizado</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

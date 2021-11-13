@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidarInicio</fullName>
+    <active>true</active>
+    <description>Não posso iniciar uma partida se o round não foi iniciado.</description>
+    <errorConditionFormula>!ISBLANK(InicioPartida__c) &amp;&amp; ISBLANK(Round__r.InicioJogos__c)</errorConditionFormula>
+    <errorDisplayField>InicioPartida__c</errorDisplayField>
+    <errorMessage>Você não pode iniciar uma partida se o round não foi iniciado.</errorMessage>
+</ValidationRule>

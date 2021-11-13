@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Round__c</fullName>
+    <description>Round dessa partida</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Round dessa partida</inlineHelpText>
+    <label>Round</label>
+    <referenceTo>Round__c</referenceTo>
+    <relationshipLabel>Partidas</relationshipLabel>
+    <relationshipName>Partidas</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

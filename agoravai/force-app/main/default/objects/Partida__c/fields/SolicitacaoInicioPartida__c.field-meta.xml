@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SolicitacaoInicioPartida__c</fullName>
+    <description>Usado no processo de aprovação para iniciar uma partida</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Usado no processo de aprovação para iniciar uma partida</inlineHelpText>
+    <label>Solicitação de Início da Partida</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Não Solicitado</fullName>
+                <default>true</default>
+                <label>Não Solicitado</label>
+            </value>
+            <value>
+                <fullName>Em Aprovação</fullName>
+                <default>false</default>
+                <label>Em Aprovação</label>
+            </value>
+            <value>
+                <fullName>Aprovado</fullName>
+                <default>false</default>
+                <label>Aprovado</label>
+            </value>
+            <value>
+                <fullName>Rejeitado</fullName>
+                <default>false</default>
+                <label>Rejeitado</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

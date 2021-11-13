@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pontuacao__c</fullName>
+    <description>Pontuação baseada na idade e dívida</description>
+    <externalId>false</externalId>
+    <formula>FLOOR(ValorDivida__c / 100) + 40000 - IF(Idade__c &gt; 80,40000,( ABS( Idade__c - 40) * 1000))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Pontuação baseada na idade e dívida</inlineHelpText>
+    <label>Pontuação</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>
