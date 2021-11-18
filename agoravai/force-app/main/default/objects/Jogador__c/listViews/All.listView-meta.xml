@@ -5,6 +5,10 @@
     <columns>Candidato__c</columns>
     <columns>CREATED_DATE</columns>
     <columns>Eliminado__c</columns>
+    <columns>DataMorte__c</columns>
+    <columns>MembroStaff__c</columns>
+    <columns>RECORDTYPE</columns>
+    <columns>Morreu__c</columns>
     <filterScope>Everything</filterScope>
     <label>Tudo</label>
 </ListView>
