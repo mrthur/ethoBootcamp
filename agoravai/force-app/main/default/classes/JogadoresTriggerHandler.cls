@@ -30,7 +30,7 @@ public without sharing class JogadoresTriggerHandler {
                 System.debug('é jogador comum OU morreu');
                 setMorte(record);
 
-            } else { //se ñ é jogador comum ou não morreu, ou seja é jogador staff OU foi eliminado
+            } else { //se ñ é jogador comum ou não morreu, ou seja é jogador staff e foi eliminado
                 System.debug('NÃO É jogador comum OU NÃO morreu');
                 setEliminado(record);
             }
