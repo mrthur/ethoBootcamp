@@ -37,16 +37,6 @@ public without sharing class JogadoresTriggerHandler {
         }
     }
 
-    private static Boolean ehJogadorComum(Jogador__c record) {
-        if (record.MembroStaff__c == null) { //é jogador comum
-            return true;
-
-        } else { //é membro da staff
-            return false;
-        }
-        
-    }
-
     private static Boolean foiEliminado(Jogador__c record,Jogador__c recordOld) {
         return isChanged(record, recordOld, Jogador__c.Eliminado__c);
     }
@@ -55,9 +45,18 @@ public without sharing class JogadoresTriggerHandler {
         return isChanged(record, recordOld, Jogador__c.Morreu__c);
     }
 
+    private static Boolean ehJogadorComum(Jogador__c record) {
+        if (record.MembroStaff__c == null) { //é jogador comum
+            return true;
+
+        } else { //é membro da staff
+            return false;
+        }
+    }
+
     private static void setMorte(Jogador__c record) {
+        setEliminado(record);
         setValue(record, Jogador__c.Morreu__c, true);
-        setValue(record, Jogador__c.Eliminado__c, true);
         setValue(record, Jogador__c.DataMorte__c, System.now());
     }
 
