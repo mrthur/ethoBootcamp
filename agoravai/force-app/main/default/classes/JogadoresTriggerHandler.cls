@@ -30,9 +30,12 @@ public without sharing class JogadoresTriggerHandler {
                 System.debug('é jogador comum OU morreu');
                 setMorte(record);
 
-            } else { //se ñ é jogador comum ou não morreu, ou seja é jogador staff e foi eliminado
-                System.debug('NÃO É jogador comum OU NÃO morreu');
+            } else if (!ehJogadorComum(record)) { //É jogador staff (e foi somente eliminado)
+                System.debug('é jogador staff e foi somente eliminado');
                 setEliminado(record);
+
+            } else { //não deve entrar em nenhum momento aqui
+                System.debug('você não deveria estar lendo isso');
             }
         }
     }
@@ -46,12 +49,17 @@ public without sharing class JogadoresTriggerHandler {
     }
 
     private static Boolean ehJogadorComum(Jogador__c record) {
-        if (record.MembroStaff__c == null) { //é jogador comum
+        /*
+        if (String.isBlank(record.MembroStaff__c)) { //é jogador comum
             return true;
 
         } else { //é membro da staff
             return false;
         }
+        */
+        return record.RecordTypeId.equals(
+            Schema.SObjectType.Jogador__c.getRecordTypeInfosByDeveloperName().get(Label.RECORD_TYPE_DEVELOPER_NAME_JOGADOR_PADRAO).getRecordTypeId()
+        );
     }
 
     private static void setMorte(Jogador__c record) {
