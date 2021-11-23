@@ -1,8 +1,23 @@
 public without sharing class JogadoresTriggerHandler {
+
+    public static void afterInsert(List<Jogador__c> records) {
+        List<Jogador__c> jogadores = [SELECT Id, Candidato__r.ValorDivida__c FROM Jogador__c WHERE Id IN :records];
+
+        for (Jogador__c jogador : jogadores) {
+            afterInsert(jogador);
+        }      
+
+        update jogadores;
+    }
+
     public static void beforeUpdate(List<Jogador__c> records, Map<Id, Jogador__c> oldMap) {
-        for (Jogador__c jogador : records) { //realiza uma iteração
+        for (Jogador__c jogador : records) { 
             beforeUpdate(jogador, oldMap.get(jogador.Id));
         }
+    }
+
+    private static void afterInsert(Jogador__c record) {
+        Utils.setValue(record, Jogador__c.Divida__c, record.Candidato__r.ValorDivida__c);
     }
 
     private static void beforeUpdate(Jogador__c record, Jogador__c recordOld) {
@@ -17,58 +32,32 @@ public without sharing class JogadoresTriggerHandler {
         return value != valueToCompare;
     }
 
-    private static void setValue(Jogador__c record, Schema.SObjectField field, Object value) {
-        record.put(field, value);
-    }
-
     private static void handleEliminacaoMorte(Jogador__c record, Jogador__c recordOld) {
 
-        if (foiEliminado(record, recordOld) || morreu(record, recordOld)) {
+        if (ehJogadorPadrao(record) && foiEliminado(record, recordOld)) {
+            Utils.setValue(record, Jogador__c.Morreu__c, true);
+        }
 
-            //se é jogador comum OU se morreu
-            if (ehJogadorComum(record) || morreu(record, recordOld)) { 
-                System.debug('é jogador comum OU morreu');
-                setMorte(record);
-
-            } else if (!ehJogadorComum(record)) { //É jogador staff (e foi somente eliminado)
-                System.debug('é jogador staff e foi somente eliminado');
-                setEliminado(record);
-
-            } else { //não deve entrar em nenhum momento aqui
-                System.debug('você não deveria estar lendo isso');
-            }
+        if (morreu(record, recordOld)) {
+            Utils.setValue(record, Jogador__c.DataMorte__c, System.now());
+            Utils.setValue(record, Jogador__c.Eliminado__c, true);
         }
     }
 
-    private static Boolean foiEliminado(Jogador__c record,Jogador__c recordOld) {
-        return isChanged(record, recordOld, Jogador__c.Eliminado__c);
-    }
-
-    private static Boolean morreu(Jogador__c record, Jogador__c recordOld) {
-        return isChanged(record, recordOld, Jogador__c.Morreu__c);
-    }
-
-    private static Boolean ehJogadorComum(Jogador__c record) {
-        /*
-        if (String.isBlank(record.MembroStaff__c)) { //é jogador comum
-            return true;
-
-        } else { //é membro da staff
-            return false;
-        }
-        */
+    private static Boolean ehJogadorPadrao(Jogador__c record) {
         return record.RecordTypeId.equals(
             Schema.SObjectType.Jogador__c.getRecordTypeInfosByDeveloperName().get(Label.RECORD_TYPE_DEVELOPER_NAME_JOGADOR_PADRAO).getRecordTypeId()
         );
     }
 
-    private static void setMorte(Jogador__c record) {
-        setEliminado(record);
-        setValue(record, Jogador__c.Morreu__c, true);
-        setValue(record, Jogador__c.DataMorte__c, System.now());
+    @TestVisible
+    private static Boolean foiEliminado(Jogador__c record, Jogador__c recordOld){
+        return isChanged(recordOld, record, Jogador__c.Eliminado__c);
     }
 
-    private static void setEliminado(Jogador__c record) {
-        setValue(record, Jogador__c.Eliminado__c, true);
+    private static Boolean morreu(Jogador__c record, Jogador__c recordOld){
+        return isChanged(recordOld, record, Jogador__c.Morreu__c);
     }
+
+
 }

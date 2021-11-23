@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ListView xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>JogadoresEliminados</fullName>
+    <fullName>Membro</fullName>
     <columns>NAME</columns>
     <columns>Candidato__c</columns>
-    <columns>MembroStaff__c</columns>
     <columns>Eliminado__c</columns>
+    <columns>Morreu__c</columns>
+    <columns>DataMorte__c</columns>
     <columns>ValorPagar__c</columns>
     <filterScope>Everything</filterScope>
     <filters>
-        <field>Eliminado__c</field>
+        <field>RECORDTYPE</field>
         <operation>equals</operation>
-        <value>1</value>
+        <value>Jogador__c.JogadorPadrao</value>
     </filters>
-    <label>Jogadores Eliminados</label>
+    <label>Jogadores</label>
 </ListView>
