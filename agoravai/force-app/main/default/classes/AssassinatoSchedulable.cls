@@ -23,7 +23,7 @@ public class AssassinatoSchedulable implements Schedulable {
         System.schedule(
             AssassinatoSchedulable.class.getName() + '-' + now.format(),
             cronString,
-            new AssassinatoSchedulable(Utils.generateRandomIntegerBetween((12*60), (36*60)))
+            new AssassinatoSchedulable(Utils.geraNumero((12*60), (36*60), null))
         );
 
         // Abort the current job
