@@ -9,6 +9,73 @@ public without sharing class JogadoresTriggerHandler {
 
         update jogadores;
     }
+    
+
+    public static void afterUpdate(List<Jogador__c> records, Map<Id, Jogador__c> oldMap) {
+
+        /*
+
+• records = registros q sofreram update (é after)
+• oldMap = os mesmos registros, antes do update
+• recordsRoundsMap = ids dos rounds dos jogadores em records
+• roundsMap = map com um select que pega todos os jogadores não eliminados dos rounds de recordsRoundsMap
+• roundsToUpdate = map em branco, será preenchido quando verificar quais os rounds que possuem vencedor.
+Percorre a lista de registros que sofreram alteração
+        */
+        Set<String> statusList = new Set<String>{'Em Andamento'};
+        //Map<Id, Round__c> roundsMap = new Map<Id, Round__c>(RoundsSelector.selectRoundsByIdStatusJogadoresVivos(Utils.getSetIds(records, Jogador__c.Round__c), statusList));
+        Set<Id> recordsRoundsMap = new Set<Id>();
+        for (Jogador__c i : records) {
+            recordsRoundsMap.add(Id.valueOf(String.valueOf(i.get(Jogador__c.Round__c))));
+        }
+        Map<Id, Round__c> roundsMap = new Map<Id, Round__c>(RoundsSelector.selectRoundsByIdStatusJogadoresVivos(recordsRoundsMap, statusList));
+        System.debug('roundsMap: ' + JSON.serialize(roundsMap));
+        Map<Id, Round__c> roundsToUpdate = new Map<Id, Round__c>();
+        for (Jogador__c record : records) {
+            System.debug('record: ' + JSON.serialize(record));
+            Jogador__c recordOld = oldMap.get(record.Id);
+            System.debug('recordOld: ' + JSON.serialize(recordOld));
+            Round__c roundRelacionadoAoRecord = roundsMap.get(record.Round__c);
+            System.debug('roundRelacionadoAoRecord: ' + JSON.serialize(roundRelacionadoAoRecord));
+            
+            afterUpdate(record, recordOld, roundRelacionadoAoRecord, roundsToUpdate);
+        }
+
+        System.debug('VAI DAR UPDATE EM: ' + JSON.serialize(roundsToUpdate.values()));
+
+        update roundsToUpdate.values();
+    }
+
+    static void afterUpdate(Jogador__c record, Jogador__c recordOld, Round__c roundRecord, Map<Id, Round__c> roundsToUpdate) {
+        handleVencedor(record, roundRecord, roundsToUpdate);
+    }
+    
+    static void handleVencedor(Jogador__c record, Round__c roundRecord, Map<Id, Round__c> roundsToUpdate) {
+        if (roundRecord != null) {
+            System.debug('handle vencedor');
+            System.debug('roundsToUpdate.containsKey(roundRecord.Id): ' + (roundsToUpdate.containsKey(roundRecord.Id)));
+            System.debug('roundRecord.Jogadores__r.size() == 1: ' + (roundRecord.Jogadores__r.size() == 1));
+            if (!roundsToUpdate.containsKey(roundRecord.Id) && roundRecord.Jogadores__r.size() == 1) {
+                System.debug('ENTROUUUU BORA SETAR O VENCEDOR FILHA DAS PUTA');
+    
+                List<Jogador__c> jogadoresRound = roundRecord.Jogadores__r;
+                System.debug('jogadores desse round: ' + JSON.serialize(jogadoresRound));
+                Jogador__c vencedor = jogadoresRound.get(0);
+                System.debug('vencedor: ' + JSON.serialize(vencedor));
+                Id roundRecordId = roundRecord.Id;
+                System.debug('roundRecordId: ' + roundRecordId);
+                Round__c roundUpdated = new Round__c();
+                roundUpdated.Id = roundRecord.Id;
+                roundUpdated.Vencedor__c = vencedor.Id;
+                roundUpdated.Status__c = 'Finalizado';
+                System.debug('roundUpdated: ' + JSON.serialize(roundUpdated));
+    
+                roundsToUpdate.put(roundUpdated.Id, roundUpdated);
+    
+                System.debug('roundsToUpdate: ' + JSON.serialize(roundsToUpdate));
+            }
+        }
+    }
 
     public static void beforeUpdate(List<Jogador__c> records, Map<Id, Jogador__c> oldMap) {
         for (Jogador__c jogador : records) { 
