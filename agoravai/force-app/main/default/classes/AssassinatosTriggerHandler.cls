@@ -8,13 +8,12 @@ public without sharing class AssassinatosTriggerHandler {
         update jogadoresMortos;
     }
 
+    //TODO: 
     static void mataJogadorAssassinado(Assassinato__c record, List<Jogador__c> jogadoresMortos) {
         jogadoresMortos.add(
             new Jogador__c(
                 Id = record.Assassinado__c,
-                Eliminado__c = true,
-                Morreu__c = true,
-                DataMorte__c = record.DataHora__c
+                Morreu__c = true
             )
         );
     }

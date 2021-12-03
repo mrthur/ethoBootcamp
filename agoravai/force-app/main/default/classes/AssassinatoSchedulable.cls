@@ -11,6 +11,7 @@ public class AssassinatoSchedulable implements Schedulable {
         AssassinatosHandler.execute();
     }
 
+    //todo: parametrizar os valores do agendamento
     private void reschedule(SchedulableContext sc)
     {
         // Re-schedule ourself to run again in "intervalMinutes" time

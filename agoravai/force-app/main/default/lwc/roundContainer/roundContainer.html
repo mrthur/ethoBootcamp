@@ -1,0 +1,14 @@
+<template>
+    <div class="container">
+        <div>{round.Name}</div>
+        <div>Lista de jogadores: </div>
+        <template for:each={round.Jogadores__r} for:item="jogador" for:index="i">
+            <c-jogador-container key={jogador.Id} jogador={jogador} index={i}></c-jogador-container>
+        </template>
+    </div>
+</template> 
+
+
+<!-- 
+    TODO: fazer o cadastro de candidatos por aqui.
+-->

@@ -1,0 +1,18 @@
+.vivo {
+    --sds-c-card-color-background: palegreen;
+    /*--sds-c-card-text-color: white;*/
+}
+
+.morto {
+    --sds-c-card-color-background: lightcoral;
+    /*--sds-c-card-text-color: white;*/
+}
+
+.assassinou {
+    --sds-c-badge-color-background: black;
+    --sds-c-badge-text-color: white;
+}
+
+.sobreviveu {
+    --sds-c-badge-color-background: gold;
+}

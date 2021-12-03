@@ -4,6 +4,27 @@ public with sharing class AssassinatosHandlerTest {
     //public static void execute()
 
     @isTest
+    static void registraAssassinatoTest() {
+        /*TESTES
+        1. assassino e assassinado preenchidos
+        2. assassino null
+        3. assassinado null
+        4. os 2 null
+        */
+        //prepara
+        Jogador__c assassino = new Jogador__c(Id='a015f000009o0lfAAA');
+        Jogador__c assassinado = new Jogador__c(Id='a015f00000Cnhc0AAB');
+        //executa
+        Test.startTest();
+        AssassinatosHandler.registraAssassinato(assassino, assassinado);
+        AssassinatosHandler.registraAssassinato(null, assassinado);
+        AssassinatosHandler.registraAssassinato(assassino, null);
+        AssassinatosHandler.registraAssassinato(null, null);
+        Test.stopTest();
+        //relatorio
+    }
+
+    @isTest
     static void ataqueVenceuDefesaTest() {
         /* TESTES
         1. ataque maior que defesa

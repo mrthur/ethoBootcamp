@@ -1,0 +1,32 @@
+<template>
+    <div class="container">
+        <lightning-combobox
+            name="round-selecionado"
+            label="Selecione uma simulação"
+            value={selectedObjValue}
+            placeholder="Rounds"
+            options={objectOptions}
+            onchange={handleObjectChange}>
+        </lightning-combobox>
+        
+        <lightning-button variant="brand" label="Simular" title="Simular Round" onclick={startSimulationClick}></lightning-button>
+
+        <!--<c-dados-round-container></c-dados-round-container>-->
+        <div>nome do round: {nomeRound} | campeao: | premio: | maior assassino: | maior sobrevivente: </div>
+    </div>
+    
+    <!--<div>informações do confronto | nome do jogador 1 Vs. nome do jogador 2 | resultado do confronto</div>-->
+    
+    <div>lista de jogadores
+    <div class="container">
+        <template for:each={listaJogadores} for:item="jogador">
+            <div key={jogador.Id}>Id: {jogador.Id} | {jogador.Name} || {jogador.Candidato}</div>
+        </template>
+    </div>
+        <!--mostrar qtd de assassinatos por jogador
+        mostrar qtd de vezes que o jogador sobreviveu a um ataque-->
+    </div>
+
+    <div>botao para jogar novamente</div>
+    
+</template>

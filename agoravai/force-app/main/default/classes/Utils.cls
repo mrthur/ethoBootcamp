@@ -13,14 +13,16 @@ public without sharing class Utils {
         return ids;
     }
 
+    //todo: arrumar nomes 
     public static Integer geraNumero(Integer valorInicial, Integer valorFinal, Integer valorParaSeEvitar) {
-        //retorno um numero negativo quando valor inicial for maior que valor final
         if (valorFinal > valorInicial) {
             Integer valor;
             while (valor == null || valor == valorParaSeEvitar) {
+                //TODO: garantir que não vai ficar com o valorParaSeEvitar repetindo
                 valor = valorInicial + Integer.valueof(Math.random() * ((valorFinal - valorInicial) + 1));
             }
             return valor;
-        } else  return -1;
+        } 
+        return -1;
     }
 }
