@@ -12,6 +12,20 @@ public without sharing class RoundsSelector {
             WHERE Id IN :ids
         ];
     }
+    
+    public static List<Round__c> selectAllRoundsWithJogadores() {
+        return [
+            SELECT  Id, Name, TotalJogadoresEliminados__c, PremioTotal__c,
+                    (
+                        SELECT Id, Nick__c, Candidato__r.Name
+                        FROM Jogadores__r 
+                        WHERE Eliminado__c = true
+                    )
+            FROM Round__c
+        ];
+    }
+
+
 
     public static List<Round__c> selectRoundsByIdStatusJogadoresVivos(Set<Id> roundsIds, Set<String> statusList) {
         return [
@@ -26,21 +40,16 @@ public without sharing class RoundsSelector {
         ];
     }
 
-    public static List<Round__c> selectAllRoundsWithJogadores() {
-        return [
-            SELECT  Id, Name, TotalJogadoresEliminados__c, PremioTotal__c,
-                    (
-                        SELECT Id, Nick__c, Candidato__r.Name
-                        FROM Jogadores__r 
-                        WHERE Eliminado__c = true
-                    )
-            FROM Round__c
-        ];
-    }
-
     public static List<Round__c> selectAllRoundsWithJogadoresNaoEliminados() {
         return [
-            SELECT Id, Name, Vencedor__c, PremioTotal__c, (SELECT Id, Name,  Candidato__r.Name FROM Jogadores__r)
+            SELECT 
+                Id, Name, Vencedor__c, PremioTotal__c,
+                (SELECT 
+                    Id, Name, QuantidadeAssassinatos__c, Candidato__r.Name, Morreu__c, Forca__c, Velocidade__c, Inteligencia__c
+                    FROM Jogadores__r 
+                    WHERE RecordTypeId = :Schema.SObjectType.Jogador__c.getRecordTypeInfosByDeveloperName().get(Label.RECORD_TYPE_DEVELOPER_NAME_JOGADOR_PADRAO).getRecordTypeId()
+                    ORDER BY QuantidadeAssassinatos__c DESC
+                )
             FROM Round__c
             WHERE Status__c = 'Em Andamento'
         ];

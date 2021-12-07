@@ -1,20 +1,36 @@
 <template>
     <lightning-layout vertical-align="center">
-        <lightning-layout-item flexibility="auto" padding="around-small">
-            <div class="slds-grid slds-wrap slds-gutters">
-                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_3-of-12">
-                    Campeão: Jogador X
-                </div>
-                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_3-of-12">
-                    Prêmio: R$ 33333
-                </div>
-                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_3-of-12">
-                    Maior assassino: Jogador Y
-                </div>
-                <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_3-of-12">
-                    Maior sobrevivente: Jogador Z
-                </div>
-            </div>
-        </lightning-layout-item>
+      <lightning-layout-item flexibility="auto" padding="around-small">
+        <div class="slds-grid slds-wrap slds-gutters">
+          <div
+            class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_3-of-12"
+          >
+            Campeão: Jogador X
+          </div>
+          <div
+            class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_3-of-12"
+          >
+            Prêmio: R$ 33333
+          </div>
+          <div
+            class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_3-of-12"
+          >
+            Maior assassino: <!--{maiorAssassino}-->
+            <span>
+              <template for:each={maioresAssassinos} for:item="maiorAssassino">
+                <c-maior-assassino-container
+                  key={maiorAssassino.Id}
+                  assassino={maiorAssassino}
+                ></c-maior-assassino-container>
+              </template>
+          </span>
+          </div>
+          <div
+            class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_3-of-12"
+          >
+            Maior sobrevivente: Jogador Z
+          </div>
+        </div>
+      </lightning-layout-item>
     </lightning-layout>
-</template>
+  </template>

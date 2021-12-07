@@ -13,7 +13,13 @@ public without sharing class Utils {
         return ids;
     }
 
-    //todo: arrumar nomes 
+    //TODO: desenvolver esse cálculo aleatório.
+    //retornar número aleatório entre X e Y (inclusivo)
+    //x <= retorno <= y
+    public static Integer generateRandomIntegerBetween(Integer x, Integer y) {
+        return (y - x);
+    }
+
     public static Integer geraNumero(Integer valorInicial, Integer valorFinal, Integer valorParaSeEvitar) {
         if (valorFinal > valorInicial) {
             Integer valor;

@@ -1,15 +1,18 @@
 <template>
     <!--
-    <p class="slds-p-horizontal_small">Round: {round}</p>
-    <p class="slds-p-horizontal_small">Jogadores: {jogadores}</p>
-    -->
+      <p class="slds-p-horizontal_small">Round: {round}</p>
+      <p class="slds-p-horizontal_small">Jogadores: {jogadores}</p>
+      -->
     <lightning-layout vertical-align="center">
-        <lightning-layout-item flexibility="auto" padding="around-small">
-            <div class="slds-grid slds-wrap slds-gutters">
-                <template for:each={jogadores} for:item="jogador">
-                    <c-jogador-container key={jogador.Id} jogador={jogador}></c-jogador-container>
-                </template>
-            </div>
-        </lightning-layout-item>
+      <lightning-layout-item flexibility="auto" padding="around-small">
+        <div class="slds-grid slds-wrap slds-gutters">
+          <template for:each={jogadores} for:item="jogador">
+            <c-jogador-container
+              key={jogador.Id}
+              jogador={jogador}
+            ></c-jogador-container>
+          </template>
+        </div>
+      </lightning-layout-item>
     </lightning-layout>
-</template>
+  </template>

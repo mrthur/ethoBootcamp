@@ -1,6 +1,12 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api } from "lwc";
 
 export default class JogandoRoundContainer extends LightningElement {
-    @api round;
-    @api jogadores;
+  @api roundSelecionado;
+
+  get jogadores() {
+    if (this.roundSelecionado) {
+      return this.roundSelecionado.Jogadores__r;
+    }
+    return [];
+  }
 }

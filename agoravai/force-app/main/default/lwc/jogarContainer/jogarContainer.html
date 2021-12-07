@@ -1,24 +1,31 @@
 <template>
     <lightning-card>
-        <lightning-layout vertical-align="end">
-            <lightning-layout-item flexibility="auto" padding="around-small">
-                <lightning-combobox
-                    label="Round"
-                    value={roundSelecionado}
-                    placeholder="Selecione um Round"
-                    options={roundsOptions}
-                    onchange={roundSelecionadoChange}>
-                </lightning-combobox>
-            </lightning-layout-item>
-            <lightning-layout-item flexibility="auto, no-grow" padding="around-small">
-                <lightning-button label="Jogar" title="Jogar" variant="destructive" onclick={handleClick}></lightning-button>
-            </lightning-layout-item>
-        </lightning-layout>
-
-        <c-resultado-round-container></c-resultado-round-container>
-        <c-jogando-round-container round={roundSelecionado} jogadores={listaJogadores}></c-jogando-round-container>
+      <lightning-layout vertical-align="end">
+        <lightning-layout-item flexibility="auto" padding="around-small">
+          <lightning-combobox
+            label="Round"
+            value={roundSelecionado}
+            placeholder="Selecione um Round"
+            options={roundsCombobox}
+            onchange={roundSelecionadoChange}
+          >
+          </lightning-combobox>
+        </lightning-layout-item>
+        <lightning-layout-item flexibility="auto, no-grow" padding="around-small">
+          <lightning-button
+            label="Tentar matar"
+            title="Tentar matar"
+            variant="destructive"
+            onclick={handleClick}
+          ></lightning-button>
+        </lightning-layout-item>
+      </lightning-layout>
+  
+      <c-resultado-round-container round-selecionado={roundSelecionadoCerto}></c-resultado-round-container>
+      <c-jogando-round-container
+        round-selecionado={roundSelecionadoCerto}
+      ></c-jogando-round-container>
     </lightning-card>
-</template>
-
-
-
+  
+    <!-- {aux.Name} -->
+  </template>
